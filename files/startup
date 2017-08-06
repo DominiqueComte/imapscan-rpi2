@@ -14,7 +14,8 @@ if [ ! -f startup_done ]; then
     rm imapfilter_config.lua
   fi
   if [ ! -f accounts/imap_accounts.txt ]; then
-    mv imap_accounts.txt accounts/imap_accounts.txt
+    cp imap_accounts.txt accounts/imap_accounts.txt
+    mv imap_accounts.txt accounts/imap_accounts_learn.txt
   else
     rm imap_accounts.txt
   fi
@@ -22,7 +23,6 @@ if [ ! -f startup_done ]; then
   # start services, etc...
   service rsyslog start
 
-  alias logger="logger -e -s"
   logger "running sa-learn"
   sa-learn --force-expire -D
 

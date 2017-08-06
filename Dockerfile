@@ -36,33 +36,17 @@ RUN wget https://github.com/isbg/isbg/archive/master.zip && \
     rm -Rf isbg-master && \
     rm isbg.zip
 
-# spamassassin
+# copy config files and scripts
+ADD files/* /root/
+
+# set up
 RUN mkdir -p /var/spamassassin/bayesdb && \
-    chown -R debian-spamd:mail /var/spamassassin
-ADD spamassassin/user_prefs spamassassin_user_prefs
-
-# imapfilter
-RUN mkdir .imapfilter
-ADD imapfilter/config.lua imapfilter_config.lua
-
-# settings dir
-RUN mkdir accounts
-ADD accounts/imap_accounts.txt imap_accounts.txt
-ADD accounts/imap_accounts.txt imap_accounts_learn.txt
-
-# enable spamassassin
-RUN sed -i 's/ENABLED=0/ENABLED=1/;s/CRON=0/CRON=1/;s/^OPTIONS=".*"/OPTIONS="--allow-tell --max-children 5 --helper-home-dir -u debian-spamd -x --virtual-config-dir=\/var\/spamassassin"/' /etc/default/spamassassin && \
-    echo "bayes_path /var/spamassassin/bayesdb/bayes" >> /etc/spamassassin/local.cf
-
-# copy isbg scripts
-ADD *.sh /root/
-
-# crontab
-ADD cron_scans cron_scans
-RUN crontab cron_scans && rm cron_scans
-
-# startup script
-ADD startup /root/startup
+    chown -R debian-spamd:mail /var/spamassassin && \
+    sed -i 's/ENABLED=0/ENABLED=1/;s/CRON=0/CRON=1/;s/^OPTIONS=".*"/OPTIONS="--allow-tell --max-children 5 --helper-home-dir -u debian-spamd -x --virtual-config-dir=\/var\/spamassassin"/' /etc/default/spamassassin && \
+    echo "bayes_path /var/spamassassin/bayesdb/bayes" >> /etc/spamassassin/local.cf && \
+    crontab cron_scans && rm cron_scans && \
+    mkdir .imapfilter && mkdir accounts && \
+    mv bashrc .bashrc
 
 # volumes
 VOLUME /var/spamassassin
