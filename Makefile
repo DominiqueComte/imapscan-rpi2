@@ -9,7 +9,7 @@ build:
 	docker build -t $(NAME):$(VERSION) --rm .
 
 test:
-	env NAME=$(NAME) VERSION=$(VERSION) ./test/runner.sh
+#	env NAME=$(NAME) VERSION=$(VERSION) ./test/runner.sh
 
 tag_latest:
 	docker tag $(NAME):$(VERSION) $(NAME):latest
@@ -19,10 +19,10 @@ release: test tag_latest
 	docker push $(NAME)
 	@echo "*** Don't forget to create a tag by creating an official GitHub release."
 
-ssh:
-	chmod 600 image/services/sshd/keys/insecure_key
-	@ID=$$(docker ps | grep -F "$(NAME):$(VERSION)" | awk '{ print $$1 }') && \
-		if test "$$ID" = ""; then echo "Container is not running."; exit 1; fi && \
-		IP=$$(docker inspect $$ID | grep IPAddr | sed 's/.*: "//; s/".*//') && \
-		echo "SSHing into $$IP" && \
-ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i image/services/sshd/keys/insecure_key root@$$IP
+#ssh:
+#	chmod 600 image/services/sshd/keys/insecure_key
+#	@ID=$$(docker ps | grep -F "$(NAME):$(VERSION)" | awk '{ print $$1 }') && \
+#		if test "$$ID" = ""; then echo "Container is not running."; exit 1; fi && \
+#		IP=$$(docker inspect $$ID | grep IPAddr | sed 's/.*: "//; s/".*//') && \
+#		echo "SSHing into $$IP" && \
+#ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i image/services/sshd/keys/insecure_key root@$$IP
