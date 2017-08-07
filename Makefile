@@ -1,5 +1,5 @@
 NAME = domcomte/imapscan-rpi2
-VERSION = 0.2
+VERSION = 0.3
 
 .PHONY: all build test tag_latest release ssh
 

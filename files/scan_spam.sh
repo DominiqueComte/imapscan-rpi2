@@ -31,5 +31,5 @@ if [ -f "${file}" ]; then
       --imapinbox "${account[4]}" 2>&1 | logger
     logger "scanning of ${account[1]}/${account[4]} done"
   done < "$file"
+  imapfilter | logger
 fi
-imapfilter
