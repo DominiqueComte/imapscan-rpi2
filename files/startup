@@ -20,6 +20,9 @@ if [ ! -f startup_done ]; then
     rm imap_accounts.txt
   fi
 
+  # move configuration files in place
+  mv rsyslog.conf /etc/
+
   # start services, etc...
   service rsyslog start
 
