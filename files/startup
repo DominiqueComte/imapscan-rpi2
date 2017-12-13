@@ -49,8 +49,6 @@ alias logger="logger -e -s"
 # start services, etc...
 logger "starting services"
 service rsyslog start
-service exim4 start
-service dbus start
 
 logger "updating SpamAssassin rules"
 sa-update -v --refreshmirrors | logger
