@@ -2,6 +2,13 @@
 
 cd /root
 if [ ! -f startup_done ]; then
+  if [ -f rsyslog.conf ]; then
+    mv rsyslog.conf /etc/
+  fi
+  if [ -f bashrc ]; then
+    cat bashrc >> /etc/bash.bashrc
+    rm bashrc
+  fi
   if [ -f /var/spamassassin/scan_lock ]; then
     rm /var/spamassassin/scan_lock
   fi
@@ -26,7 +33,7 @@ if [ ! -f startup_done ]; then
     rm imap_accounts.txt
   fi
   if [ ! -f accounts/imap_accounts_learn.txt ]; then
-    cp accounts/imap_accounts.txt accounts/imap_accounts.txt
+    head -n 1 accounts/imap_accounts.txt > accounts/imap_accounts_learn.txt
   fi
 
   unlink /etc/localtime

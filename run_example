@@ -1,14 +1,14 @@
 #! /bin/bash
 
-IMAGE_VERSION=0.12
-CONTAINER_VOLUMES_DIR=${HOME}/docker_volumes/imapscan
+set -ex
 
-mkdir ${CONTAINER_VOLUMES_DIR}/spamassassin 2>/dev/null
-mkdir ${CONTAINER_VOLUMES_DIR}/accounts 2>/dev/null
-mkdir ${CONTAINER_VOLUMES_DIR}/imapfilter 2>/dev/null
+IMAGE_VERSION=0.13
+CONTAINER_VOLUMES_DIR=/opt/imapscan
+
+sudo mkdir -p ${CONTAINER_VOLUMES_DIR}/spamassassin ${CONTAINER_VOLUMES_DIR}/accounts ${CONTAINER_VOLUMES_DIR}/imapfilter
 
 docker run -d --name imapscan_${IMAGE_VERSION} \
 	-v ${CONTAINER_VOLUMES_DIR}/spamassassin:/var/spamassassin \
 	-v ${CONTAINER_VOLUMES_DIR}/imapfilter:/root/.imapfilter \
 	-v ${CONTAINER_VOLUMES_DIR}/accounts:/root/accounts \
-	domcomte/imapscan-rpi2:latest
+	domcomte/imapscan-rpi2:${IMAGE_VERSION}
