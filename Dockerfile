@@ -1,4 +1,4 @@
-FROM resin/raspberry-pi2-debian:latest
+FROM resin/rpi-raspbian:stretch-20171206
 
 # shell to start from Kitematic
 ENV DEBIAN_FRONTEND=noninteractive
@@ -6,13 +6,14 @@ ENV SHELL=/bin/bash
 
 # install dependencies
 RUN apt-get update && \
-    apt-get install -y apt-utils && \
-    apt-get install -y \
+    apt-get install apt-utils && \
+    apt-get install \
       cron \
       imapfilter \
       nano \
       python \
       python-pip \
+      python-setuptools \
       pyzor \
       razor \
       rsyslog \
@@ -23,6 +24,7 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     pip install --upgrade pip && \
+    pip install wheel && \
     pip install docopt==0.6.2
 
 WORKDIR /root
