@@ -26,7 +26,7 @@ if [ ! -f startup_done ]; then
     rm imap_accounts.txt
   fi
   if [ ! -f accounts/imap_accounts_learn.txt ]; then
-    cp accounts/imap_accounts.txt accounts/imap_accounts.txt
+    cp accounts/imap_accounts.txt accounts/imap_accounts_learn.txt
   fi
 
   unlink /etc/localtime
@@ -42,8 +42,6 @@ alias logger="logger -e -s"
 # start services, etc...
 logger "starting services"
 service rsyslog start
-service exim4 start
-service dbus start
 
 logger "updating SpamAssassin rules"
 sa-update -v --refreshmirrors | logger
