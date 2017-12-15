@@ -6,7 +6,6 @@ ENV SHELL=/bin/bash
 
 # install dependencies
 RUN apt-get update && \
-    apt-get install apt-utils && \
     apt-get install \
       cron \
       imapfilter \

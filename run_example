@@ -2,7 +2,7 @@
 
 set -ex
 
-IMAGE_VERSION=0.15
+IMAGE_VERSION=0.16
 CONTAINER_VOLUMES_DIR=/opt/imapscan
 
 sudo mkdir -p ${CONTAINER_VOLUMES_DIR}/spamassassin ${CONTAINER_VOLUMES_DIR}/accounts ${CONTAINER_VOLUMES_DIR}/imapfilter
