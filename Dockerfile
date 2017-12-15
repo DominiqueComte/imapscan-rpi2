@@ -66,4 +66,4 @@ VOLUME /var/spamassassin
 VOLUME /root/.imapfilter
 VOLUME /root/accounts
 
-CMD /root/startup | /usr/bin/logger -e -s -t startup && tail -n 0 -F /var/log/*.log
+CMD /root/startup && tail -n 0 -F /var/log/*.log
