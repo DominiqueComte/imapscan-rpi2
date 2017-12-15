@@ -39,20 +39,22 @@ if [ ! -f startup_done ]; then
   touch startup_done
 fi
 
-# start services, etc...
-echo "starting services"
-service rsyslog start
+{
+  # start services, etc...
+  echo "starting services"
+  service rsyslog start
 
-echo "updating SpamAssassin rules"
-sa-update -v --refreshmirrors
-echo "running sa-learn"
-sa-learn --force-expire
+  echo "updating SpamAssassin rules"
+  sa-update -v --refreshmirrors
+  echo "running sa-learn"
+  sa-learn --force-expire
 
-logger "starting spamassassin"
-service spamassassin start
+  logger "starting spamassassin"
+  service spamassassin start
 
-echo "running learm_spam"
-./learn_spam.sh
+  echo "running learm_spam"
+  ./learn_spam.sh
 
-echo "starting CRON"
-service cron start
+  echo "starting CRON"
+  service cron start
+} | /usr/bin/logger -e -s -t startup
