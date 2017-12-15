@@ -52,7 +52,7 @@ RUN mkdir /root/accounts ; \
     crontab cron_scans && rm cron_scans ; \
     sed -i 's/ENABLED=0/ENABLED=1/' /etc/default/spamassassin ; \
     sed -i 's/CRON=0/CRON=1/' /etc/default/spamassassin ; \
-    sed -i 's/^OPTIONS=".*"/OPTIONS="--allow-tell --max-children 5 --helper-home-dir -u debian-spamd -x --virtual-config-dir=\/var\/spamassassin"/ -s mail' /etc/default/spamassassin ; \
+    sed -i 's/^OPTIONS=".*"/OPTIONS="--allow-tell --max-children 5 --helper-home-dir -u debian-spamd -x --virtual-config-dir=\/var\/spamassassin -s mail"/' /etc/default/spamassassin ; \
     echo "bayes_path /var/spamassassin/bayesdb/bayes" >> /etc/spamassassin/local.cf ; \
     echo "alias logger='/usr/bin/logger -e'" >> /etc/bash.bashrc ; \
     echo "LANG=en_US.UTF-8" > /etc/default/locale ; \
