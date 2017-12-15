@@ -27,7 +27,7 @@ if [ -f "${file}" ]; then
     #printf ">[%s]\n" "${account[@]}"
     IFS=${OLD_IFS}
     echo "scanning ${account[1]}/${account[4]}"
-    until /usr/local/bin/isbg.py --noninteractive --flag \
+    until /usr/local/bin/isbg.py --noninteractive --flag --spamc \
         --imaphost ${account[0]} --imapuser "${account[1]}"  --imappasswd "${account[2]}" \
         --spaminbox "${account[3]}" \
         --imapinbox "${account[4]}"
