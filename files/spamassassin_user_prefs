@@ -1,12 +1,10 @@
 required_score 5.0
-allow_user_rules 1
 use_razor2 1
 use_pyzor 1
 use_bayes 1
 bayes_auto_learn 1
 bayes_auto_learn_threshold_nonspam -0.001
 bayes_auto_learn_threshold_spam 9.0
-bayes_path /var/spamassassin/bayesdb/bayes
 #use_auto_whitelist 0
 score BAYES_00 -4
 score BAYES_05 -2
@@ -38,6 +36,6 @@ describe FR_REALESTATE_INVEST           French: Invest in real-estate with tax-r
 lang fr describe FR_REALESTATE_INVEST   Reduction impots immobilier.
 score FR_REALESTATE_INVEST              2.5
 
-header FR_SENT_VIA                      From =~/ via /i
-score FR_SENT_VIA                       0.1
+header FR_SENT_VIA                      From =~/ (via|par) /i
+score FR_SENT_VIA                       1
 describe FR_SENT_VIA                    From contains via
