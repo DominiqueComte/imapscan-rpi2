@@ -39,11 +39,11 @@ if [ ! -f startup_done ]; then
   touch startup_done
 fi
 
-{
-  # start services, etc...
-  echo "starting services"
-  service rsyslog start
+# start services, etc...
+echo "starting services"
+service rsyslog start
 
+{
   echo "updating SpamAssassin rules"
   sa-update -v --refreshmirrors
   echo "running sa-learn"
