@@ -1,5 +1,5 @@
 NAME = domcomte/imapscan-rpi2
-VERSION = 0.16
+VERSION = 0.17
 
 .PHONY: all build test tag_latest release ssh
 
@@ -9,7 +9,8 @@ build:
 	docker build -t $(NAME):$(VERSION) --rm .
 
 test:
-#	env NAME=$(NAME) VERSION=$(VERSION) ./test/runner.sh
+  docker run $(NAME):$(VERSION) isbg.py --version
+  docker run $(NAME):$(VERSION) imapfilter -V
 
 tag_latest:
 	docker tag $(NAME):$(VERSION) $(NAME):latest

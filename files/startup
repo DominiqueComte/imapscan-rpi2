@@ -44,6 +44,9 @@ echo "starting services"
 service rsyslog start
 
 {
+  echo "fixing permissions, just in case..."
+  chown -R debian-spamd:mail /var/spamassassin
+
   echo "updating SpamAssassin rules"
   sa-update -v --refreshmirrors
   echo "running sa-learn"

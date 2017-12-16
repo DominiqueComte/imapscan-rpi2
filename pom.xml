@@ -5,7 +5,7 @@
 
   <groupId>domcomte</groupId>
   <artifactId>imapscan-rpi2</artifactId>
-  <version>0.16</version>
+  <version>0.17</version>
 
   <description>Remote IMAP spam filtering.</description>
 

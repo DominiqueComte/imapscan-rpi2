@@ -18,24 +18,3 @@ score __DNS_FROM_RFC_POST 0
 score __DNS_FROM_RFC_ABUSE 0
 score __DNS_FROM_RFC_WHOIS 0
 
-#####
-## I can pay my taxes, thanks
-body FR_PAYLESSTAXES                    /\b(paye|calcul|simul|r.+dui|investi).{1,7}(moins|vo|ses).{0,5}imp.+t(s)?\b/i
-describe FR_PAYLESSTAXES                French: Pay less taxes
-lang fr describe FR_PAYLESSTAXES        Simulateurs et reductions d'impots.
-score FR_PAYLESSTAXES                   2.0
-
-## impots Pinel
-body FR_IMPOTSPINEL                     /\bloi.{1,10}\b.pinel/i
-describe FR_IMPOTSPINEL                 French: Taxes rebates
-lang fr describe FR_IMPOTSPINEL         Reductions d'impots Pinel
-score FR_IMPOTSPINEL                    4.0
-
-body FR_REALESTATE_INVEST               /\b(loi)? (de.robien|girardin).{1,15}(neuf|recentr.+|ancien|IR|IS|imp.+t(s)?|industriel(le)?)\b/i
-describe FR_REALESTATE_INVEST           French: Invest in real-estate with tax-reductions
-lang fr describe FR_REALESTATE_INVEST   Reduction impots immobilier.
-score FR_REALESTATE_INVEST              2.5
-
-header FR_SENT_VIA                      From =~/ (via|par) /i
-score FR_SENT_VIA                       1
-describe FR_SENT_VIA                    From contains via
